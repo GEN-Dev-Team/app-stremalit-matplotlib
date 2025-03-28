@@ -52,6 +52,14 @@ for idx, carga in enumerate(st.session_state.cargas_puntuales):
         if st.button(f"Eliminar", key=f"eliminar_cp_{idx + 1}"):
             eliminar_carga_puntual(idx)
 
+
+
+
+
+
+
+
+
 # Inicializar la lista de cargas distribuidas si no existe en el estado de sesión
 if 'cargas_distribuidas' not in st.session_state:
     st.session_state.cargas_distribuidas = []
@@ -63,15 +71,6 @@ def agregar_carga_distribuida():
 # Función para eliminar una carga distribuida
 def eliminar_carga_distribuida(idx):
     del st.session_state.cargas_distribuidas[idx]
-
-
-
-
-
-
-
-
-
 
 # Título
 st.header("Cargas distribuidas")

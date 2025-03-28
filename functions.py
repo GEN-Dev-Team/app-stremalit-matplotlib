@@ -23,9 +23,9 @@ def DMFPuntual(Long, CP, Paso=0.1):
         i = 0
         while i <= Long:
             if i < CP[1]:
-                M = R1 * i
+                M = R1 * i * (-1)
             else:
-                M = R1 * i - CP[0] * (i - CP[1])
+                M = R1 * i - CP[0] * (i - CP[1]) * (-1)
             DMF.append(M)
             i += Paso
         return DMF
