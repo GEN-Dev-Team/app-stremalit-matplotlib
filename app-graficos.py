@@ -102,28 +102,7 @@ if carga_seleccionada == 'Cargas puntuales':
             dmf1 = f.DMFPuntual(Long, CP, Paso)
             dfc1 = f.DFCPuntual(Long, CP, Paso)
             
-            # Selección de gráfico
-            opcion_grafico = st.radio("Selecciona el gráfico", ["Mostrar gráfico completo", "Ver Momentos Flectores y Fuerzas Cortantes"])
-            
-            if opcion_grafico == "Mostrar gráfico completo":
-                # Mostrar gráfico completo con la función Grafica
-                f.Grafica(Long, np.linspace(0, Long, int(Long / Paso) + 1), dmf1, dfc1)
-            
-            elif opcion_grafico == "Ver Momentos Flectores y Fuerzas Cortantes":
-                # Mostrar los gráficos de DMF y DFC por separado
-                fig, ax = plt.subplots(2, 1, figsize=(10, 8))
-                
-                ax[0].plot(np.linspace(0, Long, int(Long / Paso) + 1), dmf1, label="Diagrama de Momentos Flectores")
-                ax[0].set_title("Diagrama de Momentos Flectores (Carga Puntual)")
-                ax[0].set_xlabel("Longitud (m)")
-                ax[0].set_ylabel("Momento Flector (Ton·m)")
-                
-                ax[1].plot(np.linspace(0, Long, int(Long / Paso) + 1), dfc1, label="Diagrama de Fuerzas Cortantes", color='r')
-                ax[1].set_title("Diagrama de Fuerzas Cortantes (Carga Puntual)")
-                ax[1].set_xlabel("Longitud (m)")
-                ax[1].set_ylabel("Fuerza Cortante (Ton)")
-                
-                st.pyplot(fig)
+            f.Grafica(Long, np.linspace(0, Long, int(Long / Paso) + 1), dmf1, dfc1)
 
 elif carga_seleccionada == 'Cargas distribuidas':
     # Crear una lista de etiquetas como "Peso 1", "Peso 2", etc.
