@@ -24,6 +24,14 @@ def agregar_carga_puntual():
 def eliminar_carga_puntual(idx):
     del st.session_state.cargas_puntuales[idx]
 
+
+
+
+
+
+
+
+
 # Título
 st.header("Cargas puntuales")
 
@@ -56,6 +64,15 @@ def agregar_carga_distribuida():
 def eliminar_carga_distribuida(idx):
     del st.session_state.cargas_distribuidas[idx]
 
+
+
+
+
+
+
+
+
+
 # Título
 st.header("Cargas distribuidas")
 
@@ -80,10 +97,20 @@ for idx, carga in enumerate(st.session_state.cargas_distribuidas):
 
 # Sección de resultados
 st.markdown("<hr>", unsafe_allow_html=True)
+
+
+
+
+
+
+
+
+
+
 st.title("Resultados")
 
 # Selección de carga para mostrar el gráfico
-opciones_carga = ['Selecciona carga', 'Cargas puntuales', 'Cargas distribuidas']
+opciones_carga = ['Grafica global', 'Cargas puntuales', 'Cargas distribuidas']
 carga_seleccionada = st.selectbox("Selecciona el tipo de carga para graficar", opciones_carga)
 
 # Mostrar el gráfico de la carga seleccionada
@@ -119,29 +146,8 @@ elif carga_seleccionada == 'Cargas distribuidas':
             dmf3 = f.DMFDistribuida(Long, CD, Paso)
             dfc3 = f.DFCDistribuida(Long, CD, Paso)
             
-            # Selección de gráfico
-            opcion_grafico = st.radio("Selecciona el gráfico", ["Mostrar gráfico completo", "Ver Momentos Flectores y Fuerzas Cortantes"])
+            f.Grafica(Long, np.linspace(0, Long, int(Long / Paso) + 1), dmf3, dfc3)
             
-            if opcion_grafico == "Mostrar gráfico completo":
-                # Mostrar gráfico completo con la función Grafica
-                f.Grafica(Long, np.linspace(0, Long, int(Long / Paso) + 1), dmf3, dfc3)
-            
-            elif opcion_grafico == "Ver Momentos Flectores y Fuerzas Cortantes":
-                # Mostrar los gráficos de DMF y DFC por separado
-                fig, ax = plt.subplots(2, 1, figsize=(10, 8))
-                
-                ax[0].plot(np.linspace(0, Long, int(Long / Paso) + 1), dmf3, label="Diagrama de Momentos Flectores")
-                ax[0].set_title("Diagrama de Momentos Flectores (Carga Distribuida)")
-                ax[0].set_xlabel("Longitud (m)")
-                ax[0].set_ylabel("Momento Flector (Ton·m)")
-                
-                ax[1].plot(np.linspace(0, Long, int(Long / Paso) + 1), dfc3, label="Diagrama de Fuerzas Cortantes", color='r')
-                ax[1].set_title("Diagrama de Fuerzas Cortantes (Carga Distribuida)")
-                ax[1].set_xlabel("Longitud (m)")
-                ax[1].set_ylabel("Fuerza Cortante (Ton)")
-                
-                st.pyplot(fig)
-
 
 # Botón para generar gráfico general y tabla
 if st.button("Generar gráfico general y tabla"):
